@@ -935,7 +935,7 @@
             renderProducts(todosLosProductos);
         } catch (error) {
             console.error("Error:", error);
-            document.getElementById('products-grid').innerHTML = `
+            document.getElementById('productGrid').innerHTML = `
                 <div class="col-span-full text-center py-12 text-comic-red font-semibold">
                     No se pudo cargar el archivo <b>productos.json</b>. Revisa que esté en la misma carpeta.
                 </div>`;
@@ -944,7 +944,7 @@
 
     // 2. La lógica que "pinta" o dibuja los productos en el HTML
     function renderProducts(lista) {
-        const grid = document.getElementById('products-grid');
+        const grid = document.getElementById('productGrid');
         
         if (lista.length === 0) {
             grid.innerHTML = `<div class="col-span-full text-center py-12 text-comic-muted">No se encontraron productos.</div>`;
@@ -1000,7 +1000,6 @@
 
     // Ejecuta la función apenas se abra la página
     cargarInventario();
-</script>
   </script>
   
 </body>
