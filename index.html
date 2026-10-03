@@ -369,6 +369,30 @@
         });
       }
     }
+    // Función para cargar los productos desde el archivo productos.json
+function cargarInventario() {
+    fetch('productos.json')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("No se pudo cargar el archivo productos.json");
+            }
+            return response.json();
+        })
+        .then(data => {
+            todosLosProductos = data; // Guarda los datos en tu variable global
+            procesarCatalogoLocal();  // Procesa las categorías y pinta todo
+        })
+        .catch(error => {
+            console.error("Error al cargar el inventario:", error);
+            const grid = document.getElementById('productGrid');
+            if (grid) {
+                grid.innerHTML = `<div class="col-span-full text-center py-12 text-comic-red font-semibold">No se pudo cargar el archivo productos.json. Revisa que esté en la misma carpeta.</div>`;
+            }
+        });
+}
+
+// Y llamamos a la función al cargar la página
+cargarInventario();
 
     function procesarCatalogoLocal() {
       var categoriasDinamicas = { 'Todos': true };
@@ -963,7 +987,7 @@
                         <h4 class="font-semibold text-base mb-1 text-white">${p.nombre}</h4>
                         <p class="text-comic-red font-bold text-lg">$${p.precio.toLocaleString('es-CO')}</p>
                     </div>
-                    <a href="https://wa.me/573000000000?text=Hola,%20me%20interesa%20el%20producto:%20${encodeURIComponent(p.nombre)}" target="_blank" class="w-full py-2.5 rounded-xl bg-comic-border hover:bg-comic-purple hover:text-white text-xs font-bold transition-colors flex items-center justify-center gap-2 text-comic-text">
+                    <a href="https://wa.me/573002506144?text=Hola,%20me%20interesa%20el%20producto:%20${encodeURIComponent(p.nombre)}" target="_blank" class="w-full py-2.5 rounded-xl bg-comic-border hover:bg-comic-purple hover:text-white text-xs font-bold transition-colors flex items-center justify-center gap-2 text-comic-text">
                         Pedir por WhatsApp
                     </a>
                 </div>
@@ -977,7 +1001,7 @@
     }
 
     // 3. Lógica del buscador en tiempo real
-    const buscador = document.getElementById('search-input');
+    const buscador = document.getElementById('searchInput');
     if (buscador) {
         buscador.addEventListener('input', (e) => {
             const texto = e.target.value.toLowerCase();
