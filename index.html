@@ -906,6 +906,102 @@
         }, 300);
       }, 2500);
     }
+    <script>
+    // Variable donde se guardarán los productos que lea del archivo
+    let todosLosProductos = [];
+
+    // Función para ir a buscar el archivo de inventario en tu repositorio
+    async function cargarInventario() {
+        try {
+            // 'productos.json' debe estar en la misma carpeta que tu index.html
+            const respuesta = await fetch('productos.json');
+            if (!respuesta.ok) throw new Error('No se pudo cargar el inventario');
+            
+            todosLosProductos = await respuesta.json();
+            
+            <script>
+    // Variable global para guardar todos los productos cargados
+    let todosLosProductos = [];
+
+    // 1. Función para ir a buscar el archivo de inventario en GitHub
+    async function cargarInventario() {
+        try {
+            const respuesta = await fetch('productos.json');
+            if (!respuesta.ok) throw new Error('No se pudo conectar con el inventario');
+            
+            todosLosProductos = await respuesta.json();
+            
+            // Una vez cargados, los pintamos en pantalla
+            renderProducts(todosLosProductos);
+        } catch (error) {
+            console.error("Error:", error);
+            document.getElementById('products-grid').innerHTML = `
+                <div class="col-span-full text-center py-12 text-comic-red font-semibold">
+                    No se pudo cargar el archivo <b>productos.json</b>. Revisa que esté en la misma carpeta.
+                </div>`;
+        }
+    }
+
+    // 2. La lógica que "pinta" o dibuja los productos en el HTML
+    function renderProducts(lista) {
+        const grid = document.getElementById('products-grid');
+        
+        if (lista.length === 0) {
+            grid.innerHTML = `<div class="col-span-full text-center py-12 text-comic-muted">No se encontraron productos.</div>`;
+            return;
+        }
+
+        // Recorre cada producto del JSON y crea su tarjeta visual con Tailwind
+        grid.innerHTML = lista.map(p => `
+            <div class="bg-comic-card border border-comic-border rounded-2xl overflow-hidden hover:border-comic-purple transition-all duration-300 flex flex-col shadow-lg">
+                <div class="h-48 overflow-hidden bg-comic-bg relative">
+                    <img src="${p.imagen}" alt="${p.nombre}" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                    <span class="absolute top-3 right-3 bg-comic-bg/80 backdrop-blur text-[10px] uppercase font-bold px-2.5 py-1 rounded-full border border-comic-border text-white">${p.categoria}</span>
+                </div>
+                <div class="p-5 flex flex-col flex-grow justify-between space-y-4">
+                    <div>
+                        <h4 class="font-semibold text-base mb-1 text-white">${p.nombre}</h4>
+                        <p class="text-comic-red font-bold text-lg">$${p.precio.toLocaleString('es-CO')}</p>
+                    </div>
+                    <a href="https://wa.me/573000000000?text=Hola,%20me%20interesa%20el%20producto:%20${encodeURIComponent(p.nombre)}" target="_blank" class="w-full py-2.5 rounded-xl bg-comic-border hover:bg-comic-purple hover:text-white text-xs font-bold transition-colors flex items-center justify-center gap-2 text-comic-text">
+                        Pedir por WhatsApp
+                    </a>
+                </div>
+            </div>
+        `).join('');
+
+        // Si usas iconos de Lucide, los refresca para que aparezcan bien
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+    }
+
+    // 3. Lógica del buscador en tiempo real
+    const buscador = document.getElementById('search-input');
+    if (buscador) {
+        buscador.addEventListener('input', (e) => {
+            const texto = e.target.value.toLowerCase();
+            const filtrados = todosLosProductos.filter(p => 
+                p.nombre.toLowerCase().includes(texto) || 
+                p.categoria.toLowerCase().includes(texto)
+            );
+            renderProducts(filtrados);
+        });
+    }
+
+    // Ejecutar la carga automática al abrir la página
+    cargarInventario();
+</script>
+            renderProducts(todosLosProductos);
+        } catch (error) {
+            console.error("Error al cargar productos:", error);
+        }
+    }
+
+    // Ejecuta la función apenas se abra la página
+    cargarInventario();
+</script>
   </script>
+  
 </body>
 </html>
