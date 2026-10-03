@@ -57,17 +57,7 @@
     @keyframes slideUp { from { transform: translateY(100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
     .toast-anim { animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
     .comic-badge-shadow { box-shadow: 3px 3px 0px #000; }
-
-    /* Estilos para la ventana emergente y animaciones */
-    @keyframes slideUp { 
-      from { transform: translateY(100%); opacity: 0; } 
-      to { transform: translateY(0); opacity: 1; } 
-    }
-    .toast-anim { animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-    .comic-badge-shadow { box-shadow: 3px 3px 0px #000; }
-
   </style>
-
 </head>
 <body class="min-h-screen flex flex-col justify-between comic-dots relative selection:bg-comic-red selection:text-white">
 
@@ -181,64 +171,59 @@
       </div>
     </section>
 
-    <!-- MODAL DE FICHA DE PRODUCTO (CON GALERÍA Y MINIATURAS) -->
-  <div id="productDetailModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-    <div class="relative w-full max-w-4xl bg-comic-card border border-comic-border rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
-      
-      <!-- Barra superior del modal -->
-      <div class="bg-gradient-to-r from-comic-red to-comic-purple px-6 py-3 flex items-center justify-between text-white font-black tracking-wider text-sm">
-        <span>FICHA DE PRODUCTO</span>
-        <button onclick="closeProductModal()" class="w-8 h-8 rounded-full bg-black/40 hover:bg-black flex items-center justify-center transition">
-          <i data-lucide="x" class="w-5 h-5"></i>
-        </button>
-      </div>
-
-      <!-- Contenido principal del modal -->
-      <div class="p-6 sm:p-8 overflow-y-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+    <!-- MODAL DE FICHA DE PRODUCTO -->
+    <div id="productDetailModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+      <div class="relative w-full max-w-4xl bg-comic-card border border-comic-border rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
         
-        <!-- Columna Izquierda: Foto Grande y Miniaturas -->
-        <div class="space-y-4">
-          <div class="relative w-full h-80 sm:h-96 rounded-2xl bg-black/60 border border-comic-border overflow-hidden flex items-center justify-center">
-            <img id="modalMainImage" src="" alt="Vista previa" class="w-full h-full object-cover">
-          </div>
-          <!-- Contenedor donde se generan solas las miniaturas -->
-          <div id="modalThumbnails" class="flex items-center gap-3 overflow-x-auto pb-2"></div>
+        <div class="bg-gradient-to-r from-comic-red to-comic-purple px-6 py-3 flex items-center justify-between text-white font-black tracking-wider text-sm">
+          <span>FICHA DE PRODUCTO</span>
+          <button onclick="closeProductModal()" class="w-8 h-8 rounded-full bg-black/40 hover:bg-black flex items-center justify-center transition">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
         </div>
 
-        <!-- Columna Derecha: Información y descripción -->
-        <div class="space-y-5 flex flex-col justify-between">
-          <div class="space-y-3">
-            <span id="modalCategory" class="text-xs font-black uppercase tracking-widest text-comic-red">CATEGORÍA</span>
-            <h2 id="modalTitle" class="text-2xl sm:text-3xl font-black text-white leading-tight">Nombre del Producto</h2>
-            <p id="modalStock" class="text-xs font-semibold text-comic-muted">Stock disponible: --</p>
-            <p id="modalDescription" class="text-sm text-comic-muted leading-relaxed pt-2 border-t border-comic-border">Descripción detallada del producto...</p>
+        <div class="p-6 sm:p-8 overflow-y-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+          
+          <div class="space-y-4">
+            <div class="relative w-full h-80 sm:h-96 rounded-2xl bg-black/60 border border-comic-border overflow-hidden flex items-center justify-center">
+              <img id="modalMainImage" src="" alt="Vista previa" class="w-full h-full object-cover">
+            </div>
+            <div id="modalThumbnails" class="flex items-center gap-3 overflow-x-auto pb-2"></div>
           </div>
 
-          <div class="space-y-4 pt-4 border-t border-comic-border">
-            <div>
-              <span class="text-xs text-comic-muted block font-semibold">Precio</span>
-              <span id="modalPrice" class="text-3xl font-black text-comic-amber">$ 0</span>
+          <div class="space-y-5 flex flex-col justify-between">
+            <div class="space-y-3">
+              <span id="modalCategory" class="text-xs font-black uppercase tracking-widest text-comic-red">CATEGORÍA</span>
+              <h2 id="modalTitle" class="text-2xl sm:text-3xl font-black text-white leading-tight">Nombre del Producto</h2>
+              <p id="modalStock" class="text-xs font-semibold text-comic-muted">Stock disponible: --</p>
+              <p id="modalDescription" class="text-sm text-comic-muted leading-relaxed pt-2 border-t border-comic-border">Descripción detallada del producto...</p>
             </div>
 
-            <div class="flex items-center gap-4">
-              <span class="text-xs font-bold text-white uppercase">Cantidad</span>
-              <div class="flex items-center border border-comic-border rounded-xl bg-black/40 overflow-hidden">
-                <button onclick="changeModalQty(-1)" class="px-3 py-2 text-white hover:bg-comic-border transition font-bold">-</button>
-                <span id="modalQty" class="px-4 py-2 text-sm font-bold text-white">1</span>
-                <button onclick="changeModalQty(1)" class="px-3 py-2 text-white hover:bg-comic-border transition font-bold">+</button>
+            <div class="space-y-4 pt-4 border-t border-comic-border">
+              <div>
+                <span class="text-xs text-comic-muted block font-semibold">Precio</span>
+                <span id="modalPrice" class="text-3xl font-black text-comic-amber">$ 0</span>
               </div>
+
+              <div class="flex items-center gap-4">
+                <span class="text-xs font-bold text-white uppercase">Cantidad</span>
+                <div class="flex items-center border border-comic-border rounded-xl bg-black/40 overflow-hidden">
+                  <button onclick="changeModalQty(-1)" class="px-3 py-2 text-white hover:bg-comic-border transition font-bold">-</button>
+                  <span id="modalQty" class="px-4 py-2 text-sm font-bold text-white">1</span>
+                  <button onclick="changeModalQty(1)" class="px-3 py-2 text-white hover:bg-comic-border transition font-bold">+</button>
+                </div>
+              </div>
+
+              <button id="modalAddBtn" onclick="addModalProductToCart()" class="w-full py-4 rounded-xl bg-gradient-to-r from-comic-red to-comic-purple hover:brightness-110 text-white font-extrabold text-sm flex items-center justify-center gap-2 shadow-lg transition active:scale-95">
+                <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                <span>Agregar al pedido</span>
+              </button>
             </div>
-
-            <button id="modalAddBtn" onclick="addModalProductToCart()" class="w-full py-4 rounded-xl bg-gradient-to-r from-comic-red to-comic-purple hover:brightness-110 text-white font-extrabold text-sm flex items-center justify-center gap-2 shadow-lg transition active:scale-95">
-              <i data-lucide="shopping-bag" class="w-5 h-5"></i>
-              <span>Agregar al pedido</span>
-            </button>
           </div>
-        </div>
 
+        </div>
       </div>
     </div>
-  </div>
 
   </main>
 
@@ -304,627 +289,623 @@
     <p class="text-comic-muted/60">&copy; 2026 Comiclanona. Todos los derechos reservados.</p>
   </footer>
 
-<script>
-  /* ==========================================================================
-     AQUÍ AGREGAS O EDITAS TUS PRODUCTOS FÁCILMENTE:
-     - id: Código único del producto
-     - name: Nombre del producto
-     - category: Categoría (Ej: "Manga", "TCG", "Figuras")
-     - price: Precio en números (ej: 45000)
-     - stock: Cantidad disponible (si es 0, aparecerá como agotado)
-     - images: Enlace(s) de la imagen (pueden ser links de Imgur, Google Drive público o cualquier URL de imagen)
-     ========================================================================== */
-  var PRODUCTS = [
-    {
-      id: "manga-01",
-      name: "Blue Lock - Vol. 1",
-      category: "Manga",
-      price: 38000,
-      stock: 5,
-      images: ["https://placehold.co/500x500/141822/ff3366?text=Blue+Lock+Vol.1"]
-    },
-    {
-      id: "manga-02",
-      name: "Jujutsu Kaisen - Vol. 1",
-      category: "Manga",
-      price: 38000,
-      stock: 3,
-      images: ["https://placehold.co/500x500/141822/8a2be2?text=Jujutsu+Kaisen+1"]
-    },
-    {
-      id: "tcg-01",
-      name: "Magic: The Gathering - Sobre de Mejora",
-      category: "TCG",
-      price: 22000,
-      stock: 12,
-      images: ["https://placehold.co/500x500/141822/ffb703?text=MTG+Booster"]
-    },
-    {
-      id: "fig-01",
-      name: "Figura Coleccionable Anime",
-      category: "Coleccionables",
-      price: 95000,
-      stock: 0,
-      images: ["https://placehold.co/500x500/141822/ffffff?text=Figura+Agotada"]
+  <script>
+    var PRODUCTS = [
+      {
+        id: "manga-01",
+        name: "Blue Lock - Vol. 1",
+        category: "Manga",
+        price: 38000,
+        stock: 5,
+        description: "Tomo 1 del exitoso manga de fútbol de Bureau Kaneshiro y Yusuke Nomura. ¡Únete al proyecto Blue Lock!",
+        images: ["https://placehold.co/500x500/141822/ff3366?text=Blue+Lock+Vol.1"]
+      },
+      {
+        id: "manga-02",
+        name: "Jujutsu Kaisen - Vol. 1",
+        category: "Manga",
+        price: 38000,
+        stock: 3,
+        description: "Adéntrate en el mundo de la hechicería y las maldiciones con este primer tomo de Jujutsu Kaisen.",
+        images: ["https://placehold.co/500x500/141822/8a2be2?text=Jujutsu+Kaisen+1"]
+      },
+      {
+        id: "tcg-01",
+        name: "Magic: The Gathering - Sobre de Mejora",
+        category: "TCG",
+        price: 22000,
+        stock: 12,
+        description: "Sobre de mejora oficial de Magic: The Gathering. ¡Amplía tu colección y refuerza tu baraja!",
+        images: ["https://placehold.co/500x500/141822/ffb703?text=MTG+Booster"]
+      },
+      {
+        id: "fig-01",
+        name: "Figura Coleccionable Anime",
+        category: "Coleccionables",
+        price: 95000,
+        stock: 0,
+        description: "Figura de alta calidad de personaje de anime. Excelente nivel de detalle y acabado.",
+        images: ["https://placehold.co/500x500/141822/ffffff?text=Figura+Agotada"]
+      }
+    ];
+
+    var CATEGORIES = ['Todos'];
+    var activeCategory = 'Todos';
+    var searchQuery = '';
+    var activeSort = 'default';
+    var cart = [];
+    var selectedProductModal = null;
+    var currentModalQty = 1;
+
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+      setupEventListeners();
+      procesarCatalogoLocal();
+    });
+
+    function setupEventListeners() {
+      var searchInput = document.getElementById('searchInput');
+      var clearSearchBtn = document.getElementById('clearSearchBtn');
+
+      if (searchInput) {
+        searchInput.addEventListener('input', function(e) {
+          searchQuery = e.target.value.trim().toLowerCase();
+          if (clearSearchBtn) {
+            if (searchQuery === '') {
+              clearSearchBtn.classList.add('hidden');
+            } else {
+              clearSearchBtn.classList.remove('hidden');
+            }
+          }
+          renderProducts();
+        });
+      }
+
+      var sortSelect = document.getElementById('sortSelect');
+      if (sortSelect) {
+        sortSelect.addEventListener('change', function(e) {
+          activeSort = e.target.value;
+          renderProducts();
+        });
+      }
     }
-  ];
 
-  var CATEGORIES = ['Todos'];
-  var activeCategory = 'Todos';
-  var searchQuery = '';
-  var activeSort = 'default';
-  var cart = [];
+    function procesarCatalogoLocal() {
+      var categoriasDinamicas = { 'Todos': true };
 
-  document.addEventListener('DOMContentLoaded', function() {
-    if (typeof lucide !== 'undefined') lucide.createIcons();
-    setupEventListeners();
-    procesarCatalogoLocal();
-  });
+      for (var i = 0; i < PRODUCTS.length; i++) {
+        var p = PRODUCTS[i];
+        p.isAgotado = p.stock <= 0;
+        if (p.category) {
+          categoriasDinamicas[p.category.trim()] = true;
+        }
+      }
 
-  function setupEventListeners() {
-    var searchInput = document.getElementById('searchInput');
-    var clearSearchBtn = document.getElementById('clearSearchBtn');
+      CATEGORIES = [];
+      for (var key in categoriasDinamicas) {
+        if (Object.prototype.hasOwnProperty.call(categoriasDinamicas, key)) {
+          CATEGORIES.push(key);
+        }
+      }
 
-    if (searchInput) {
-      searchInput.addEventListener('input', function(e) {
-        searchQuery = e.target.value.trim().toLowerCase();
-        if (clearSearchBtn) {
-          if (searchQuery === '') {
-            clearSearchBtn.classList.add('hidden');
+      renderCategories();
+      renderProducts();
+    }
+
+    function cargarInventarioJSON() {
+      fetch('inventario.json')
+        .then(function(response) {
+          return response.json();
+        })
+        .then(function(data) {
+          PRODUCTS = data;
+          procesarCatalogoLocal();
+        });
+    }
+
+    function renderCategories() {
+      var container = document.getElementById('categoryContainer');
+      if (!container) return;
+
+      var html = '';
+      for (var i = 0; i < CATEGORIES.length; i++) {
+        var cat = CATEGORIES[i];
+        var isActive = cat === activeCategory;
+        var btnClasses = isActive ? 
+          'px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all duration-200 border bg-gradient-to-r from-comic-red to-comic-purple border-comic-red text-white shadow-lg' : 
+          'px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all duration-200 border bg-comic-card hover:bg-comic-border/50 border-comic-border text-comic-muted hover:text-white';
+        
+        html += '<button onclick="selectCategory(\' + cat + '\)" class="' + btnClasses + '">' + cat + '</button>';
+      }
+      container.innerHTML = html;
+    }
+
+    function selectCategory(cat) {
+      activeCategory = cat;
+      renderCategories();
+      renderProducts();
+    }
+
+    function renderProducts() {
+      var grid = document.getElementById('productGrid');
+      var emptyState = document.getElementById('emptyState');
+      var countBadge = document.getElementById('productCountBadge');
+
+      if (!grid) return;
+
+      var filtered = [];
+      for (var i = 0; i < PRODUCTS.length; i++) {
+        var p = PRODUCTS[i];
+        var matchesCat = (activeCategory === 'Todos' || p.category === activeCategory);
+        var matchesQuery = (p.name.toLowerCase().indexOf(searchQuery) !== -1 || p.category.toLowerCase().indexOf(searchQuery) !== -1);
+        if (matchesCat && matchesQuery) {
+          filtered.push(p);
+        }
+      }
+
+      if (activeSort === 'price-asc') {
+        filtered.sort(function(a, b) { return a.price - b.price; });
+      } else if (activeSort === 'price-desc') {
+        filtered.sort(function(a, b) { return b.price - a.price; });
+      } else if (activeSort === 'name-asc') {
+        filtered.sort(function(a, b) { return a.name.localeCompare(b.name); });
+      } else if (activeSort === 'name-desc') {
+        filtered.sort(function(a, b) { return b.name.localeCompare(a.name); });
+      }
+
+      if (countBadge) countBadge.textContent = filtered.length + ' productos';
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '';
+        if (emptyState) {
+          emptyState.classList.remove('hidden');
+          emptyState.classList.add('flex');
+        }
+        return;
+      }
+
+      if (emptyState) {
+        emptyState.classList.add('hidden');
+        emptyState.classList.remove('flex');
+      }
+
+      var gridHTML = '';
+      for (var pIndex = 0; pIndex < filtered.length; pIndex++) {
+        var p = filtered[pIndex];
+        
+        var slidesHTML = '';
+        for (var iIndex = 0; iIndex < p.images.length; iIndex++) {
+          var imgUrl = p.images[iIndex];
+          var visibilityClass = (iIndex === 0) ? 'block' : 'hidden';
+          slidesHTML += '<img src="' + imgUrl + '" id="slide-' + pIndex + '-' + iIndex + '" class="w-full h-full object-cover transition-opacity duration-300 ' + visibilityClass + '" onerror="this.src=\'https://placehold.co/500x500/141822/94a3b8?text=COMICLANONA\'">';
+        }
+
+        var dotsHTML = '';
+        if (p.images.length > 1) {
+          dotsHTML += '<div class="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">';
+          for (var dIndex = 0; dIndex < p.images.length; dIndex++) {
+            var dotClass = (dIndex === 0) ? 'w-2 h-2 rounded-full transition-all bg-white scale-125' : 'w-2 h-2 rounded-full transition-all bg-white/40';
+            dotsHTML += '<button onclick="setSlide(' + pIndex + ', ' + dIndex + ', ' + p.images.length + ')" id="dot-' + pIndex + '-' + dIndex + '" class="' + dotClass + '"></button>';
+          }
+          dotsHTML += '</div>';
+        }
+
+        var navButtons = '';
+        if (p.images.length > 1) {
+          navButtons = '<button onclick="moveSlide(' + pIndex + ', -1, ' + p.images.length + ')" class="absolute left-2 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-black/60 text-white flex items-center justify-center text-xs hover:bg-black transition z-10">❮</button>' +
+                       '<button onclick="moveSlide(' + pIndex + ', 1, ' + p.images.length + ')" class="absolute right-2 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-black/60 text-white flex items-center justify-center text-xs hover:bg-black transition z-10">❯</button>';
+        }
+
+        var agotadoBadge = p.isAgotado ? '<span class="absolute top-3 left-3 text-[10px] font-black tracking-wider uppercase px-2.5 py-1 rounded-md text-white bg-red-600 comic-badge-shadow z-20">🚫 AGOTADO</span>' : '';
+        var cardOpacity = p.isAgotado ? 'opacity-75 grayscale-[0.3]' : '';
+
+        var actionButton = '';
+        if (p.isAgotado) {
+          actionButton = '<button disabled class="px-3 py-2 rounded-xl bg-gray-800 text-gray-500 text-xs font-bold cursor-not-allowed">Agotado</button>';
+        } else {
+          actionButton = '<button onclick="addToCart(\'' + p.id + '\')" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-comic-red to-comic-purple hover:brightness-110 text-white text-xs font-bold flex items-center gap-1.5 shadow-md active:scale-95 transition"><i data-lucide="plus" class="w-4 h-4"></i><span>Agregar</span></button>';
+        }
+
+        gridHTML += '<div class="product-card bg-comic-card border border-comic-border rounded-2xl overflow-hidden flex flex-col justify-between ' + cardOpacity + '">' +
+          '<div class="cursor-pointer" onclick="openProductModal(\'' + p.id + '\')">' +
+            '<div class="relative w-full h-52 bg-black/50 overflow-hidden group" id="carousel-' + pIndex + '">' +
+              slidesHTML + navButtons + dotsHTML + agotadoBadge +
+            '</div>' +
+            '<div class="p-4 space-y-2">' +
+              '<span class="text-[10px] font-extrabold uppercase tracking-widest text-comic-muted">' + p.category + '</span>' +
+              '<h3 class="font-bold text-white text-base leading-snug line-clamp-2 hover:text-comic-red transition-colors">' + p.name + '</h3>' +
+              '<p class="text-xs text-comic-muted line-clamp-1">Código: ' + p.id + ' | Stock: ' + (p.stock > 0 ? p.stock + ' und.' : 'Agotado') + '</p>' +
+            '</div>' +
+          '</div>' +
+          '<div class="p-4 pt-0 flex items-center justify-between gap-2 mt-2">' +
+            '<div>' +
+              '<span class="text-[10px] text-comic-muted block font-semibold">Precio</span>' +
+              '<span class="text-lg font-black text-comic-amber">' + formatCurrency(p.price) + '</span>' +
+            '</div>' +
+            actionButton +
+          '</div>' +
+        '</div>';
+      }
+
+      grid.innerHTML = gridHTML;
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+    }
+
+    function moveSlide(pIndex, direction, totalSlides) {
+      var activeIndex = 0;
+      for (var i = 0; i < totalSlides; i++) {
+        var slide = document.getElementById('slide-' + pIndex + '-' + i);
+        if (slide && !slide.classList.contains('hidden')) {
+          activeIndex = i;
+          break;
+        }
+      }
+      var nextIndex = activeIndex + direction;
+      if (nextIndex >= totalSlides) nextIndex = 0;
+      if (nextIndex < 0) nextIndex = totalSlides - 1;
+      setSlide(pIndex, nextIndex, totalSlides);
+    }
+
+    function setSlide(pIndex, targetIndex, totalSlides) {
+      for (var i = 0; i < totalSlides; i++) {
+        var slide = document.getElementById('slide-' + pIndex + '-' + i);
+        var dot = document.getElementById('dot-' + pIndex + '-' + i);
+        if (slide) {
+          if (i === targetIndex) {
+            slide.classList.remove('hidden');
+            slide.classList.add('block');
           } else {
-            clearSearchBtn.classList.remove('hidden');
+            slide.classList.remove('block');
+            slide.classList.add('hidden');
           }
         }
-        renderProducts();
-      });
-    }
-
-    var sortSelect = document.getElementById('sortSelect');
-    if (sortSelect) {
-      sortSelect.addEventListener('change', function(e) {
-        activeSort = e.target.value;
-        renderProducts();
-      });
-    }
-  }
-
-  function procesarCatalogoLocal() {
-    var categoriasDinamicas = { 'Todos': true };
-
-    for (var i = 0; i < PRODUCTS.length; i++) {
-      var p = PRODUCTS[i];
-      p.isAgotado = p.stock <= 0;
-      if (p.category) {
-        categoriasDinamicas[p.category.trim()] = true;
-      }
-    }
-
-    CATEGORIES = [];
-    for (var key in categoriasDinamicas) {
-      if (Object.prototype.hasOwnProperty.call(categoriasDinamicas, key)) {
-        CATEGORIES.push(key);
-      }
-    }
-
-    renderCategories();
-    renderProducts();
-  }
-
-  function renderCategories() {
-    var container = document.getElementById('categoryContainer');
-    if (!container) return;
-
-    var html = '';
-    for (var i = 0; i < CATEGORIES.length; i++) {
-      var cat = CATEGORIES[i];
-      var isActive = cat === activeCategory;
-      var btnClasses = isActive ? 
-        'px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all duration-200 border bg-gradient-to-r from-comic-red to-comic-purple border-comic-red text-white shadow-lg' : 
-        'px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all duration-200 border bg-comic-card hover:bg-comic-border/50 border-comic-border text-comic-muted hover:text-white';
-      
-      html += '<button onclick="selectCategory(\'' + cat + '\')" class="' + btnClasses + '">' + cat + '</button>';
-    }
-    container.innerHTML = html;
-  }
-
-  function selectCategory(cat) {
-    activeCategory = cat;
-    renderCategories();
-    renderProducts();
-  }
-
-  function renderProducts() {
-    var grid = document.getElementById('productGrid');
-    var emptyState = document.getElementById('emptyState');
-    var countBadge = document.getElementById('productCountBadge');
-
-    if (!grid) return;
-
-    var filtered = [];
-    for (var i = 0; i < PRODUCTS.length; i++) {
-      var p = PRODUCTS[i];
-      var matchesCat = (activeCategory === 'Todos' || p.category === activeCategory);
-      var matchesQuery = (p.name.toLowerCase().indexOf(searchQuery) !== -1 || p.category.toLowerCase().indexOf(searchQuery) !== -1);
-      if (matchesCat && matchesQuery) {
-        filtered.push(p);
-      }
-    }
-
-    if (activeSort === 'price-asc') {
-      filtered.sort(function(a, b) { return a.price - b.price; });
-    } else if (activeSort === 'price-desc') {
-      filtered.sort(function(a, b) { return b.price - a.price; });
-    } else if (activeSort === 'name-asc') {
-      filtered.sort(function(a, b) { return a.name.localeCompare(b.name); });
-    } else if (activeSort === 'name-desc') {
-      filtered.sort(function(a, b) { return b.name.localeCompare(a.name); });
-    }
-
-    if (countBadge) countBadge.textContent = filtered.length + ' productos';
-
-    if (filtered.length === 0) {
-      grid.innerHTML = '';
-      if (emptyState) {
-        emptyState.classList.remove('hidden');
-        emptyState.classList.add('flex');
-      }
-      return;
-    }
-
-    if (emptyState) {
-      emptyState.classList.add('hidden');
-      emptyState.classList.remove('flex');
-    }
-
-    var gridHTML = '';
-    for (var pIndex = 0; pIndex < filtered.length; pIndex++) {
-      var p = filtered[pIndex];
-      
-      var slidesHTML = '';
-      for (var iIndex = 0; iIndex < p.images.length; iIndex++) {
-        var imgUrl = p.images[iIndex];
-        var visibilityClass = (iIndex === 0) ? 'block' : 'hidden';
-        slidesHTML += '<img src="' + imgUrl + '" id="slide-' + pIndex + '-' + iIndex + '" class="w-full h-full object-cover transition-opacity duration-300 ' + visibilityClass + '" onerror="this.src=\'https://placehold.co/500x500/141822/94a3b8?text=COMICLANONA\'">';
-      }
-
-      var dotsHTML = '';
-      if (p.images.length > 1) {
-        dotsHTML += '<div class="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">';
-        for (var dIndex = 0; dIndex < p.images.length; dIndex++) {
-          var dotClass = (dIndex === 0) ? 'w-2 h-2 rounded-full transition-all bg-white scale-125' : 'w-2 h-2 rounded-full transition-all bg-white/40';
-          dotsHTML += '<button onclick="setSlide(' + pIndex + ', ' + dIndex + ', ' + p.images.length + ')" id="dot-' + pIndex + '-' + dIndex + '" class="' + dotClass + '"></button>';
+        if (dot) {
+          if (i === targetIndex) {
+            dot.className = 'w-2 h-2 rounded-full transition-all bg-white scale-125';
+          } else {
+            dot.className = 'w-2 h-2 rounded-full transition-all bg-white/40';
+          }
         }
-        dotsHTML += '</div>';
       }
+    }
 
-      var navButtons = '';
-      if (p.images.length > 1) {
-        navButtons = '<button onclick="moveSlide(' + pIndex + ', -1, ' + p.images.length + ')" class="absolute left-2 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-black/60 text-white flex items-center justify-center text-xs hover:bg-black transition z-10">❮</button>' +
-                     '<button onclick="moveSlide(' + pIndex + ', 1, ' + p.images.length + ')" class="absolute right-2 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-black/60 text-white flex items-center justify-center text-xs hover:bg-black transition z-10">❯</button>';
+    function openProductModal(id) {
+      var product = null;
+      for (var i = 0; i < PRODUCTS.length; i++) {
+        if (PRODUCTS[i].id === id) {
+          product = PRODUCTS[i];
+          break;
+        }
       }
+      if (!product) return;
 
-      var agotadoBadge = p.isAgotado ? '<span class="absolute top-3 left-3 text-[10px] font-black tracking-wider uppercase px-2.5 py-1 rounded-md text-white bg-red-600 comic-badge-shadow z-20">🚫 AGOTADO</span>' : '';
-      var cardOpacity = p.isAgotado ? 'opacity-75 grayscale-[0.3]' : '';
+      selectedProductModal = product;
+      currentModalQty = 1;
 
-      var actionButton = '';
-      if (p.isAgotado) {
-        actionButton = '<button disabled class="px-3 py-2 rounded-xl bg-gray-800 text-gray-500 text-xs font-bold cursor-not-allowed">Agotado</button>';
+      document.getElementById('modalCategory').textContent = product.category;
+      document.getElementById('modalTitle').textContent = product.name;
+      document.getElementById('modalStock').textContent = product.stock > 0 ? 'Stock disponible: ' + product.stock + ' unidades' : 'Producto Agotado';
+      document.getElementById('modalDescription').textContent = product.description || 'Sin descripción detallada por el momento.';
+      document.getElementById('modalPrice').textContent = formatCurrency(product.price);
+      document.getElementById('modalQty').textContent = currentModalQty;
+
+      var addBtn = document.getElementById('modalAddBtn');
+      if (product.isAgotado) {
+        addBtn.disabled = true;
+        addBtn.className = 'w-full py-4 rounded-xl bg-gray-800 text-gray-500 font-extrabold text-sm cursor-not-allowed';
+        addBtn.innerHTML = '<span>Agotado</span>';
       } else {
-        actionButton = '<button onclick="addToCart(\'' + p.id + '\')" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-comic-red to-comic-purple hover:brightness-110 text-white text-xs font-bold flex items-center gap-1.5 shadow-md active:scale-95 transition"><i data-lucide="plus" class="w-4 h-4"></i><span>Agregar</span></button>';
+        addBtn.disabled = false;
+        addBtn.className = 'w-full py-4 rounded-xl bg-gradient-to-r from-comic-red to-comic-purple hover:brightness-110 text-white font-extrabold text-sm flex items-center justify-center gap-2 shadow-lg transition active:scale-95';
+        addBtn.innerHTML = '<i data-lucide="shopping-bag" class="w-5 h-5"></i><span>Agregar al pedido</span>';
       }
 
-      gridHTML += '<div class="product-card bg-comic-card border border-comic-border rounded-2xl overflow-hidden flex flex-col justify-between ' + cardOpacity + '">' +
-        '<div>' +
-          '<div class="relative w-full h-52 bg-black/50 overflow-hidden group" id="carousel-' + pIndex + '">' +
-            slidesHTML + navButtons + dotsHTML + agotadoBadge +
-          '</div>' +
-          '<div class="p-4 space-y-2">' +
-            '<span class="text-[10px] font-extrabold uppercase tracking-widest text-comic-muted">' + p.category + '</span>' +
-            '<h3 class="font-bold text-white text-base leading-snug line-clamp-2">' + p.name + '</h3>' +
-            '<p class="text-xs text-comic-muted line-clamp-1">Código: ' + p.id + ' | Stock: ' + (p.stock > 0 ? p.stock + ' und.' : 'Agotado') + '</p>' +
-          '</div>' +
-        '</div>' +
-        '<div class="p-4 pt-0 flex items-center justify-between gap-2 mt-2">' +
-          '<div>' +
-            '<span class="text-[10px] text-comic-muted block font-semibold">Precio</span>' +
-            '<span class="text-lg font-black text-comic-amber">' + formatCurrency(p.price) + '</span>' +
-          '</div>' +
-          actionButton +
-        '</div>' +
-      '</div>';
-    }
-
-    grid.innerHTML = gridHTML;
-    if (typeof lucide !== 'undefined') lucide.createIcons();
-  }
-
-  function moveSlide(pIndex, direction, totalSlides) {
-    var activeIndex = 0;
-    for (var i = 0; i < totalSlides; i++) {
-      var slide = document.getElementById('slide-' + pIndex + '-' + i);
-      if (slide && !slide.classList.contains('hidden')) {
-        activeIndex = i;
-        break;
-      }
-    }
-    var nextIndex = activeIndex + direction;
-    if (nextIndex >= totalSlides) nextIndex = 0;
-    if (nextIndex < 0) nextIndex = totalSlides - 1;
-    setSlide(pIndex, nextIndex, totalSlides);
-  }
-
-  function setSlide(pIndex, targetIndex, totalSlides) {
-    for (var i = 0; i < totalSlides; i++) {
-      var slide = document.getElementById('slide-' + pIndex + '-' + i);
-      var dot = document.getElementById('dot-' + pIndex + '-' + i);
-      if (slide) {
-        if (i === targetIndex) {
-          slide.classList.remove('hidden');
-          slide.classList.add('block');
-        } else {
-          slide.classList.remove('block');
-          slide.classList.add('hidden');
+      var mainImg = document.getElementById('modalMainImage');
+      var thumbsContainer = document.getElementById('modalThumbnails');
+      
+      if (product.images && product.images.length > 0) {
+        mainImg.src = product.images[0];
+        var thumbsHTML = '';
+        for (var j = 0; j < product.images.length; j++) {
+          var imgUrl = product.images[j];
+          var borderClass = (j === 0) ? 'border-2 border-comic-red scale-105' : 'border-2 border-comic-border opacity-70 hover:opacity-100';
+          thumbsHTML += '<button onclick="changeModalImage(\'' + imgUrl + '\', this)" class="w-16 h-16 rounded-xl overflow-hidden ' + borderClass + ' bg-black/50 transition-all flex-shrink-0">' +
+            '<img src="' + imgUrl + '" class="w-full h-full object-cover">' +
+          '</button>';
         }
-      }
-      if (dot) {
-        if (i === targetIndex) {
-          dot.className = 'w-2 h-2 rounded-full transition-all bg-white scale-125';
-        } else {
-          dot.className = 'w-2 h-2 rounded-full transition-all bg-white/40';
-        }
-      }
-    }
-  }
-
-  function addToCart(id) {
-    var product = null;
-    for (var i = 0; i < PRODUCTS.length; i++) {
-      if (PRODUCTS[i].id === id) {
-        product = PRODUCTS[i];
-        break;
-      }
-    }
-
-    if (!product || product.isAgotado) return;
-
-    var existing = null;
-    for (var j = 0; j < cart.length; j++) {
-      if (cart[j].id === id) {
-        existing = cart[j];
-        break;
-      }
-    }
-
-    if (existing) {
-      if (existing.quantity < product.stock) {
-        existing.quantity += 1;
+        thumbsContainer.innerHTML = thumbsHTML;
       } else {
-        showToast('Stock máximo alcanzado (' + product.stock + ' disponibles)');
+        mainImg.src = '';
+        thumbsContainer.innerHTML = '';
+      }
+
+      var modal = document.getElementById('productDetailModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+    }
+
+    function closeProductModal() {
+      var modal = document.getElementById('productDetailModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      selectedProductModal = null;
+    }
+
+    function changeModalImage(src, btnElement) {
+      document.getElementById('modalMainImage').src = src;
+      var buttons = btnElement.parentElement.children;
+      for (var i = 0; i < buttons.length; i++) {
+        buttons[i].className = 'w-16 h-16 rounded-xl overflow-hidden border-2 border-comic-border opacity-70 hover:opacity-100 bg-black/50 transition-all flex-shrink-0';
+      }
+      btnElement.className = 'w-16 h-16 rounded-xl overflow-hidden border-2 border-comic-red scale-105 bg-black/50 transition-all flex-shrink-0';
+    }
+
+    function changeModalQty(delta) {
+      if (!selectedProductModal) return;
+      var newQty = currentModalQty + delta;
+      if (newQty < 1) return;
+      if (newQty > selectedProductModal.stock) {
+        showToast('Stock máximo alcanzado (' + selectedProductModal.stock + ')');
         return;
       }
-    } else {
-      cart.push({
-        id: product.id,
-        name: product.name,
-        price: product.price,
-        stock: product.stock,
-        quantity: 1,
-        image: product.images[0]
-      });
+      currentModalQty = newQty;
+      document.getElementById('modalQty').textContent = currentModalQty;
     }
 
-    updateCartUI();
-    showToast('¡' + product.name + ' agregado a tu orden!');
-  }
+    function addModalProductToCart() {
+      if (!selectedProductModal || selectedProductModal.isAgotado) return;
 
-  function updateQuantity(id, delta) {
-    var item = null;
-    var product = null;
+      var existing = null;
+      for (var j = 0; j < cart.length; j++) {
+        if (cart[j].id === selectedProductModal.id) {
+          existing = cart[j];
+          break;
+        }
+      }
 
-    for (var i = 0; i < cart.length; i++) {
-      if (cart[i].id === id) {
-        item = cart[i];
-        break;
+      if (existing) {
+        if (existing.quantity + currentModalQty <= selectedProductModal.stock) {
+          existing.quantity += currentModalQty;
+        } else {
+          showToast('No puedes agregar más del stock disponible');
+          return;
+        }
+      } else {
+        cart.push({
+          id: selectedProductModal.id,
+          name: selectedProductModal.name,
+          price: selectedProductModal.price,
+          stock: selectedProductModal.stock,
+          quantity: currentModalQty,
+          image: selectedProductModal.images[0]
+        });
+      }
+
+      updateCartUI();
+      showToast('¡' + currentModalQty + 'x ' + selectedProductModal.name + ' agregado a tu orden!');
+      closeProductModal();
+    }
+
+    function addToCart(id) {
+      var product = null;
+      for (var i = 0; i < PRODUCTS.length; i++) {
+        if (PRODUCTS[i].id === id) {
+          product = PRODUCTS[i];
+          break;
+        }
+      }
+
+      if (!product || product.isAgotado) return;
+
+      var existing = null;
+      for (var j = 0; j < cart.length; j++) {
+        if (cart[j].id === id) {
+          existing = cart[j];
+          break;
+        }
+      }
+
+      if (existing) {
+        if (existing.quantity < product.stock) {
+          existing.quantity += 1;
+        } else {
+          showToast('Stock máximo alcanzado (' + product.stock + ' disponibles)');
+          return;
+        }
+      } else {
+        cart.push({
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          stock: product.stock,
+          quantity: 1,
+          image: product.images[0]
+        });
+      }
+
+      updateCartUI();
+      showToast('¡' + product.name + ' agregado a tu orden!');
+    }
+
+    function updateQuantity(id, delta) {
+      var item = null;
+      var product = null;
+
+      for (var i = 0; i < cart.length; i++) {
+        if (cart[i].id === id) {
+          item = cart[i];
+          break;
+        }
+      }
+      for (var j = 0; j < PRODUCTS.length; j++) {
+        if (PRODUCTS[j].id === id) {
+          product = PRODUCTS[j];
+          break;
+        }
+      }
+
+      if (!item) return;
+
+      if (delta > 0 && product && item.quantity >= product.stock) {
+        showToast('Solo quedan ' + product.stock + ' unidades disponibles.');
+        return;
+      }
+
+      item.quantity += delta;
+      if (item.quantity <= 0) {
+        removeFromCart(id);
+      } else {
+        updateCartUI();
       }
     }
-    for (var j = 0; j < PRODUCTS.length; j++) {
-      if (PRODUCTS[j].id === id) {
-        product = PRODUCTS[j];
-        break;
+
+    function removeFromCart(id) {
+      var newCart = [];
+      for (var i = 0; i < cart.length; i++) {
+        if (cart[i].id !== id) {
+          newCart.push(cart[i]);
+        }
       }
-    }
-
-    if (!item) return;
-
-    if (delta > 0 && product && item.quantity >= product.stock) {
-      showToast('Solo quedan ' + product.stock + ' unidades disponibles.');
-      return;
-    }
-
-    item.quantity += delta;
-    if (item.quantity <= 0) {
-      removeFromCart(id);
-    } else {
+      cart = newCart;
       updateCartUI();
     }
-  }
 
-  function removeFromCart(id) {
-    var newCart = [];
-    for (var i = 0; i < cart.length; i++) {
-      if (cart[i].id !== id) {
-        newCart.push(cart[i]);
+    function clearCart() {
+      cart = [];
+      updateCartUI();
+    }
+
+    function updateCartUI() {
+      var badge = document.getElementById('cartBadge');
+      var container = document.getElementById('cartItemsContainer');
+      var subtotalEl = document.getElementById('cartSubtotal');
+      var totalEl = document.getElementById('cartTotal');
+      var checkoutBtn = document.getElementById('checkoutBtn');
+
+      var totalCount = 0;
+      var totalPrice = 0;
+      for (var i = 0; i < cart.length; i++) {
+        totalCount += cart[i].quantity;
+        totalPrice += (cart[i].price * cart[i].quantity);
       }
-    }
-    cart = newCart;
-    updateCartUI();
-  }
 
-  function clearCart() {
-    cart = [];
-    updateCartUI();
-  }
+      if (badge) badge.textContent = totalCount;
 
-  function updateCartUI() {
-    var badge = document.getElementById('cartBadge');
-    var container = document.getElementById('cartItemsContainer');
-    var subtotalEl = document.getElementById('cartSubtotal');
-    var totalEl = document.getElementById('cartTotal');
-    var checkoutBtn = document.getElementById('checkoutBtn');
-
-    var totalCount = 0;
-    var totalPrice = 0;
-    for (var i = 0; i < cart.length; i++) {
-      totalCount += cart[i].quantity;
-      totalPrice += (cart[i].price * cart[i].quantity);
-    }
-
-    if (badge) badge.textContent = totalCount;
-
-    if (container) {
-      if (cart.length === 0) {
-        container.innerHTML = '<div class="flex flex-col items-center justify-center py-12 text-center text-comic-muted space-y-3"><i data-lucide="shopping-cart" class="w-12 h-12 text-comic-border"></i><p class="text-xs sm:text-sm font-semibold">Tu cesta está vacía por ahora.</p></div>';
-        if (checkoutBtn) checkoutBtn.disabled = true;
-      } else {
-        var cartHTML = '';
-        for (var j = 0; j < cart.length; j++) {
-          var item = cart[j];
-          cartHTML += '<div class="flex items-center justify-between gap-3 p-3 bg-comic-bg rounded-xl border border-comic-border">' +
-            '<img src="' + item.image + '" alt="' + item.name + '" class="w-12 h-12 object-cover rounded-lg bg-black/40 border border-comic-border">' +
-            '<div class="flex-grow min-w-0">' +
-              '<h4 class="text-xs font-bold text-white truncate">' + item.name + '</h4>' +
-              '<p class="text-xs text-comic-amber font-extrabold">' + formatCurrency(item.price) + '</p>' +
-              '<div class="flex items-center gap-2 mt-1">' +
-                '<button onclick="updateQuantity(\'' + item.id + '\', -1)" class="w-5 h-5 rounded bg-comic-border hover:bg-comic-red text-white text-xs flex items-center justify-center font-bold">-</button>' +
-                '<span class="text-xs font-bold text-white">' + item.quantity + '</span>' +
-                '<button onclick="updateQuantity(\'' + item.id + '\', 1)" class="w-5 h-5 rounded bg-comic-border hover:bg-comic-red text-white text-xs flex items-center justify-center font-bold">+</button>' +
+      if (container) {
+        if (cart.length === 0) {
+          container.innerHTML = '<div class="flex flex-col items-center justify-center py-12 text-center text-comic-muted space-y-3"><i data-lucide="shopping-cart" class="w-12 h-12 text-comic-border"></i><p class="text-xs sm:text-sm font-semibold">Tu cesta está vacía por ahora.</p></div>';
+          if (checkoutBtn) checkoutBtn.disabled = true;
+        } else {
+          var cartHTML = '';
+          for (var j = 0; j < cart.length; j++) {
+            var item = cart[j];
+            cartHTML += '<div class="flex items-center justify-between gap-3 p-3 bg-comic-bg rounded-xl border border-comic-border">' +
+              '<img src="' + item.image + '" alt="' + item.name + '" class="w-12 h-12 object-cover rounded-lg bg-black/40 border border-comic-border">' +
+              '<div class="flex-grow min-w-0">' +
+                '<h4 class="text-xs font-bold text-white truncate">' + item.name + '</h4>' +
+                '<p class="text-xs text-comic-amber font-extrabold">' + formatCurrency(item.price) + '</p>' +
+                '<div class="flex items-center gap-2 mt-1">' +
+                  '<button onclick="updateQuantity(\'' + item.id + '\', -1)" class="w-5 h-5 rounded bg-comic-border hover:bg-comic-red text-white text-xs flex items-center justify-center font-bold">-</button>' +
+                  '<span class="text-xs font-bold text-white">' + item.quantity + '</span>' +
+                  '<button onclick="updateQuantity(\'' + item.id + '\', 1)" class="w-5 h-5 rounded bg-comic-border hover:bg-comic-red text-white text-xs flex items-center justify-center font-bold">+</button>' +
+                '</div>' +
               '</div>' +
-            '</div>' +
-            '<button onclick="removeFromCart(\'' + item.id + '\')" class="p-1.5 text-comic-muted hover:text-red-400 transition"><i data-lucide="trash-2" class="w-4 h-4"></i></button>' +
-          '</div>';
+              '<button onclick="removeFromCart(\'' + item.id + '\')" class="p-1.5 text-comic-muted hover:text-red-400 transition"><i data-lucide="trash-2" class="w-4 h-4"></i></button>' +
+            '</div>';
+          }
+          container.innerHTML = cartHTML;
+          if (checkoutBtn) checkoutBtn.disabled = false;
         }
-        container.innerHTML = cartHTML;
-        if (checkoutBtn) checkoutBtn.disabled = false;
       }
+
+      if (subtotalEl) subtotalEl.textContent = formatCurrency(totalPrice);
+      if (totalEl) totalEl.textContent = formatCurrency(totalPrice);
+      if (typeof lucide !== 'undefined') lucide.createIcons();
     }
 
-    if (subtotalEl) subtotalEl.textContent = formatCurrency(totalPrice);
-    if (totalEl) totalEl.textContent = formatCurrency(totalPrice);
-    if (typeof lucide !== 'undefined') lucide.createIcons();
-  }
+    function toggleCartModal(open) {
+      var modal = document.getElementById('cartModal');
+      var drawer = document.getElementById('cartDrawer');
+      if (!modal || !drawer) return;
 
-  function toggleCartModal(open) {
-    var modal = document.getElementById('cartModal');
-    var drawer = document.getElementById('cartDrawer');
-    if (!modal || !drawer) return;
-
-    if (open) {
-      modal.classList.remove('invisible', 'opacity-0');
-      drawer.classList.remove('translate-x-full');
-    } else {
-      modal.classList.add('opacity-0');
-      drawer.classList.add('translate-x-full');
-      setTimeout(function() {
-        modal.classList.add('invisible');
-      }, 300);
-    }
-  }
-
-  function sendWhatsAppOrder() {
-    if (cart.length === 0) return;
-    var phoneNumber = "573002506144";
-    var message = "💥 *NUEVO PEDIDO - COMICLANONA STORE*\n\nHola, me gustaría reservar los siguientes artículos de su catálogo web:\n\n";
-
-    for (var i = 0; i < cart.length; i++) {
-      var item = cart[i];
-      message += (i + 1) + ". *" + item.name + "* (Código: " + item.id + ")\n";
-      message += "   - Cantidad: " + item.quantity + "\n";
-      message += "   - Precio unitario: " + formatCurrency(item.price) + "\n";
-      message += "   - Subtotal: " + formatCurrency(item.price * item.quantity) + "\n\n";
-    }
-
-    var total = 0;
-    for (var j = 0; j < cart.length; j++) {
-      total += (cart[j].price * cart[j].quantity);
-    }
-
-    message += "💰 *TOTAL ESTIMADO: " + formatCurrency(total) + "*\n\nQuedo atento para coordinar la disponibilidad, método de pago y envío. ¡Gracias!";
-
-    window.open('https://wa.me/' + phoneNumber + '?text=' + encodeURIComponent(message), '_blank');
-  }
-
-  function formatCurrency(amount) {
-    return '$ ' + amount.toLocaleString('es-CO');
-  }
-
-  function clearSearch() {
-    var searchInput = document.getElementById('searchInput');
-    var clearSearchBtn = document.getElementById('clearSearchBtn');
-    if (searchInput) searchInput.value = '';
-    searchQuery = '';
-    if (clearSearchBtn) clearSearchBtn.classList.add('hidden');
-    renderProducts();
-  }
-
-  function resetFilters() {
-    activeCategory = 'Todos';
-    clearSearch();
-    activeSort = 'default';
-    var sortSelect = document.getElementById('sortSelect');
-    if (sortSelect) sortSelect.value = 'default';
-    renderCategories();
-    renderProducts();
-  }
-
-  function showToast(msg) {
-    var container = document.getElementById('toastContainer');
-    if (!container) return;
-
-    var toast = document.createElement('div');
-    toast.className = 'toast-anim bg-comic-card border border-comic-red/60 text-white text-xs font-bold px-4 py-3 rounded-xl shadow-2xl flex items-center gap-2';
-    toast.innerHTML = '<i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i><span>' + msg + '</span>';
-    container.appendChild(toast);
-    if (typeof lucide !== 'undefined') lucide.createIcons();
-
-    setTimeout(function() {
-      toast.style.opacity = '0';
-      toast.style.transform = 'translateY(100%)';
-      toast.style.transition = 'all 0.3s ease';
-      setTimeout(function() {
-        toast.remove();
-      }, 300);
-    }, 2500);
-  }
-</script>
-function cargarInventarioJSON() {
-    fetch('inventario.json') // <--- Aquí le indicamos que lea tu archivo separado
-      .then(function(response) {
-        return response.json();
-      })
-      .then(function(data) {
-        PRODUCTS = data; // Carga los productos en la tienda automáticamente
-        procesarCatalogoLocal();
-      });
-  }
-// --- FUNCIONES NUEVAS PARA ABRIR EL MODAL Y SUS MINIATURAS ---
-
-  function openProductModal(id) {
-    var product = null;
-    for (var i = 0; i < PRODUCTS.length; i++) {
-      if (PRODUCTS[i].id === id) {
-        product = PRODUCTS[i];
-        break;
-      }
-    }
-    if (!product) return;
-
-    selectedProductModal = product;
-    currentModalQty = 1;
-
-    document.getElementById('modalCategory').textContent = product.category;
-    document.getElementById('modalTitle').textContent = product.name;
-    document.getElementById('modalStock').textContent = product.stock > 0 ? 'Stock disponible: ' + product.stock + ' unidades' : 'Producto Agotado';
-    document.getElementById('modalDescription').textContent = product.description || 'Sin descripción detallada por el momento.';
-    document.getElementById('modalPrice').textContent = formatCurrency(product.price);
-    document.getElementById('modalQty').textContent = currentModalQty;
-
-    var addBtn = document.getElementById('modalAddBtn');
-    if (product.isAgotado) {
-      addBtn.disabled = true;
-      addBtn.className = 'w-full py-4 rounded-xl bg-gray-800 text-gray-500 font-extrabold text-sm cursor-not-allowed';
-      addBtn.innerHTML = '<span>Agotado</span>';
-    } else {
-      addBtn.disabled = false;
-      addBtn.className = 'w-full py-4 rounded-xl bg-gradient-to-r from-comic-red to-comic-purple hover:brightness-110 text-white font-extrabold text-sm flex items-center justify-center gap-2 shadow-lg transition active:scale-95';
-      addBtn.innerHTML = '<i data-lucide="shopping-bag" class="w-5 h-5"></i><span>Agregar al pedido</span>';
-    }
-
-    // Cargar imagen principal y generar miniaturas solas
-    var mainImg = document.getElementById('modalMainImage');
-    var thumbsContainer = document.getElementById('modalThumbnails');
-    
-    if (product.images && product.images.length > 0) {
-      mainImg.src = product.images[0];
-      var thumbsHTML = '';
-      for (var j = 0; j < product.images.length; j++) {
-        var imgUrl = product.images[j];
-        var borderClass = (j === 0) ? 'border-2 border-comic-red scale-105' : 'border-2 border-comic-border opacity-70 hover:opacity-100';
-        thumbsHTML += '<button onclick="changeModalImage(\'' + imgUrl + '\', this)" class="w-16 h-16 rounded-xl overflow-hidden ' + borderClass + ' bg-black/50 transition-all flex-shrink-0">' +
-          '<img src="' + imgUrl + '" class="w-full h-full object-cover">' +
-        '</button>';
-      }
-      thumbsContainer.innerHTML = thumbsHTML;
-    } else {
-      mainImg.src = '';
-      thumbsContainer.innerHTML = '';
-    }
-
-    var modal = document.getElementById('productDetailModal');
-    modal.classList.remove('hidden');
-    modal.classList.add('flex');
-    if (typeof lucide !== 'undefined') lucide.createIcons();
-  }
-
-  function closeProductModal() {
-    var modal = document.getElementById('productDetailModal');
-    modal.classList.add('hidden');
-    modal.classList.remove('flex');
-    selectedProductModal = null;
-  }
-
-  function changeModalImage(src, btnElement) {
-    document.getElementById('modalMainImage').src = src;
-    var buttons = btnElement.parentElement.children;
-    for (var i = 0; i < buttons.length; i++) {
-      buttons[i].className = 'w-16 h-16 rounded-xl overflow-hidden border-2 border-comic-border opacity-70 hover:opacity-100 bg-black/50 transition-all flex-shrink-0';
-    }
-    btnElement.className = 'w-16 h-16 rounded-xl overflow-hidden border-2 border-comic-red scale-105 bg-black/50 transition-all flex-shrink-0';
-  }
-
-  function changeModalQty(delta) {
-    if (!selectedProductModal) return;
-    var newQty = currentModalQty + delta;
-    if (newQty < 1) return;
-    if (newQty > selectedProductModal.stock) {
-      showToast('Stock máximo alcanzado (' + selectedProductModal.stock + ')');
-      return;
-    }
-    currentModalQty = newQty;
-    document.getElementById('modalQty').textContent = currentModalQty;
-  }
-
-  function addModalProductToCart() {
-    if (!selectedProductModal || selectedProductModal.isAgotado) return;
-
-    var existing = null;
-    for (var j = 0; j < cart.length; j++) {
-      if (cart[j].id === selectedProductModal.id) {
-        existing = cart[j];
-        break;
-      }
-    }
-
-    if (existing) {
-      if (existing.quantity + currentModalQty <= selectedProductModal.stock) {
-        existing.quantity += currentModalQty;
+      if (open) {
+        modal.classList.remove('invisible', 'opacity-0');
+        drawer.classList.remove('translate-x-full');
       } else {
-        showToast('No puedes agregar más del stock disponible');
-        return;
+        modal.classList.add('opacity-0');
+        drawer.classList.add('translate-x-full');
+        setTimeout(function() {
+          modal.classList.add('invisible');
+        }, 300);
       }
-    } else {
-      cart.push({
-        id: selectedProductModal.id,
-        name: selectedProductModal.name,
-        price: selectedProductModal.price,
-        stock: selectedProductModal.stock,
-        quantity: currentModalQty,
-        image: selectedProductModal.images[0]
-      });
     }
 
-    updateCartUI();
-    showToast('¡' + currentModalQty + 'x ' + selectedProductModal.name + ' agregado a tu orden!');
-    closeProductModal();
-  }
+    function sendWhatsAppOrder() {
+      if (cart.length === 0) return;
+      var phoneNumber = "573002506144";
+      var message = "💥 *NUEVO PEDIDO - COMICLANONA STORE*\n\nHola, me gustaría reservar los siguientes artículos de su catálogo web:\n\n";
+
+      for (var i = 0; i < cart.length; i++) {
+        var item = cart[i];
+        message += (i + 1) + ". *" + item.name + "* (Código: " + item.id + ")\n";
+        message += "   - Cantidad: " + item.quantity + "\n";
+        message += "   - Precio unitario: " + formatCurrency(item.price) + "\n";
+        message += "   - Subtotal: " + formatCurrency(item.price * item.quantity) + "\n\n";
+      }
+
+      var total = 0;
+      for (var j = 0; j < cart.length; j++) {
+        total += (cart[j].price * cart[j].quantity);
+      }
+
+      message += "💰 *TOTAL ESTIMADO: " + formatCurrency(total) + "*\n\nQuedo atento para coordinar la disponibilidad, método de pago y envío. ¡Gracias!";
+
+      window.open('https://wa.me/' + phoneNumber + '?text=' + encodeURIComponent(message), '_blank');
+    }
+
+    function formatCurrency(amount) {
+      return '$ ' + amount.toLocaleString('es-CO');
+    }
+
+    function clearSearch() {
+      var searchInput = document.getElementById('searchInput');
+      var clearSearchBtn = document.getElementById('clearSearchBtn');
+      if (searchInput) searchInput.value = '';
+      searchQuery = '';
+      if (clearSearchBtn) clearSearchBtn.classList.add('hidden');
+      renderProducts();
+    }
+
+    function resetFilters() {
+      activeCategory = 'Todos';
+      clearSearch();
+      activeSort = 'default';
+      var sortSelect = document.getElementById('sortSelect');
+      if (sortSelect) sortSelect.value = 'default';
+      renderCategories();
+      renderProducts();
+    }
+
+    function showToast(msg) {
+      var container = document.getElementById('toastContainer');
+      if (!container) return;
+
+      var toast = document.createElement('div');
+      toast.className = 'toast-anim bg-comic-card border border-comic-red/60 text-white text-xs font-bold px-4 py-3 rounded-xl shadow-2xl flex items-center gap-2';
+      toast.innerHTML = '<i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i><span>' + msg + '</span>';
+      container.appendChild(toast);
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+
+      setTimeout(function() {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(100%)';
+        toast.style.transition = 'all 0.3s ease';
+        setTimeout(function() {
+          toast.remove();
+        }, 300);
+      }, 2500);
+    }
+  </script>
 </body>
 </html>
