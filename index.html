@@ -371,7 +371,7 @@
     }
     // Función para cargar los productos desde el archivo productos.json
 function cargarInventario() {
-    fetch('productos.json')
+    fetch('https://raw.githubusercontent.com/nostradamus0o0popo-ai/COMICLANONA-beta-1/main/productos.json')
         .then(response => {
             if (!response.ok) {
                 throw new Error("No se pudo cargar el archivo productos.json");
@@ -417,7 +417,7 @@ cargarInventario();
     }
 
     function cargarInventarioJSON() {
-      fetch('inventario.json')
+      fetch('https://raw.githubusercontent.com/nostradamus0o0popo-ai/COMICLANONA-beta-1/main/productos.json')
         .then(function(response) {
           return response.json();
         })
@@ -938,7 +938,7 @@ cargarInventario();
     async function cargarInventario() {
         try {
             // 'productos.json' debe estar en la misma carpeta que tu index.html
-            const respuesta = await fetch('productos.json');
+            const respuesta = await fetch('https://raw.githubusercontent.com/nostradamus0o0popo-ai/COMICLANONA-beta-1/main/productos.json');
             if (!respuesta.ok) throw new Error('No se pudo cargar el inventario');
             
             todosLosProductos = await respuesta.json();
@@ -950,7 +950,7 @@ cargarInventario();
     // 1. Función para ir a buscar el archivo de inventario en GitHub
     async function cargarInventario() {
         try {
-            const respuesta = await fetch('productos.json');
+            const respuesta = await fetch('https://raw.githubusercontent.com/nostradamus0o0popo-ai/COMICLANONA-beta-1/main/productos.json');
             if (!respuesta.ok) throw new Error('No se pudo conectar con el inventario');
             
             todosLosProductos = await respuesta.json();
