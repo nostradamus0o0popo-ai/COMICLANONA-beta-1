@@ -371,7 +371,7 @@
     }
     // Función para cargar los productos desde el archivo productos.json
 function cargarInventario() {
-    fetch('https://raw.githubusercontent.com/nostradamus0o0popo-ai/COMICLANONA-beta-1/refs/heads/main/productos.json')
+    fetch('https://raw.githubusercontent.com/nostradamus0o0popo-ai/COMICLANONA-beta-1/refs/heads/main/productos.json');
   .then(response => response.json())
   .then(data => {
     PRODUCTS = data;
@@ -418,7 +418,7 @@ cargarInventario();
     }
 
     function cargarInventarioJSON() {
-      fetch('https://raw.githubusercontent.com/nostradamus0o0popo-ai/COMICLANONA-beta-1/refs/heads/main/productos.json')
+      fetch('https://raw.githubusercontent.com/nostradamus0o0popo-ai/COMICLANONA-beta-1/refs/heads/main/productos.json');
         .then(function(response) {
           return response.json();
         })
