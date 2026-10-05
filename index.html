@@ -10,7 +10,7 @@
     tailwind.config = {
       darkMode: 'class',
       theme: {
-        extend: {
+        extend: {F
           colors: {
             comic: {
               bg: '#0a0c10',
@@ -371,12 +371,13 @@
     }
     // Función para cargar los productos desde el archivo productos.json
 function cargarInventario() {
-    fetch('/COMICLANONA-beta-1/productos.json')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("No se pudo cargar el archivo productos.json");
-            }
-            return response.json();
+    fetch('https://raw.githubusercontent.com/nostradamus0o0popo-ai/COMICLANONA-beta-1/refs/heads/main/productos.json')
+  .then(response => response.json())
+  .then(data => {
+    PRODUCTS = data;
+    procesarCatalogoLocal();
+  })
+  .catch(error => console.error("Error cargando productos:", error));
         })
         .then(data => {
             todosLosProductos = data; // Guarda los datos en tu variable global
@@ -417,7 +418,7 @@ cargarInventario();
     }
 
     function cargarInventarioJSON() {
-      fetch('/COMICLANONA-beta-1/productos.json')
+      fetch('https://raw.githubusercontent.com/nostradamus0o0popo-ai/COMICLANONA-beta-1/refs/heads/main/productos.json')
         .then(function(response) {
           return response.json();
         })
@@ -938,7 +939,7 @@ cargarInventario();
     async function cargarInventario() {
         try {
             // 'productos.json' debe estar en la misma carpeta que tu index.html
-            const respuesta = await fetch('/COMICLANONA-beta-1/productos.json');
+            const respuesta = await fetch('https://raw.githubusercontent.com/nostradamus0o0popo-ai/COMICLANONA-beta-1/refs/heads/main/productos.json');
             if (!respuesta.ok) throw new Error('No se pudo cargar el inventario');
             
             todosLosProductos = await respuesta.json();
